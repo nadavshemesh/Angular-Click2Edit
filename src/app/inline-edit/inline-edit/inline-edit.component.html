@@ -1,0 +1,42 @@
+<div class="inline-edit-component">
+  <span *ngIf="label" class="label" [ngClass]="{'label-inline': inlineLabel}">{{label}} </span>
+  <span class="edit-icon" *ngIf="permission">&#9998;</span>
+  <div [ngClass]="{'edit-text':permission, 'label-inline': inlineLabel}"
+  	*ngIf="!editMode && type != InlineTypes.EDIT_DATE">{{value}}</div>
+  <div [ngClass]="{'edit-text':permission, 'label-inline': inlineLabel}"
+  	*ngIf="!editMode && type === InlineTypes.EDIT_DATE">{{value | date:'MM/dd/yyyy'}}</div>
+  <form class="inline-edit" [ngClass]="{'label-inline': inlineLabel}"  *ngIf="editMode" [formGroup]="form">
+  	<!-- Text Field -->
+  	<input *ngIf="type === InlineTypes.EDIT_TEXT" id="field" type="text" [min]="min" [max]="max" 
+  	    placeholder="{{placeholder}}" [ngClass]="{'label-inline': inlineLabel}" [value]="value"
+  	    formControlName="field" autofocus />
+  	<!-- Number Field -->
+  	<input *ngIf="type === InlineTypes.EDIT_NUMBER" [min]="min" [max]="max" id="field" type="number"
+  		placeholder="{{placeholder}}" [ngClass]="{'label-inline': inlineLabel}" [value]="value"
+  		formControlName="field" autofocus />
+  	<!-- Text Area -->
+  	<textarea *ngIf="type === InlineTypes.EDIT_AREA" id="field" [minlength]="min" [maxlength]="max" cols="20" rows="5"
+  		placeholder="{{placeholder}}" [ngClass]="{'label-inline': inlineLabel}" formControlName="field"
+  		[value]="value" autofocus>
+  		{{value}}
+  	</textarea>
+  	<!-- Date Field -->
+  	<input *ngIf="type === InlineTypes.EDIT_DATE" [min]="min | date:'yyyy-MM-dd'" [max]="max | date:'yyyy-MM-dd'"
+  		id="field" type="date" placeholder="{{placeholder}}" value="{{value | date:'yyyy-MM-dd'}}" 
+  		formControlName="field" [ngClass]="{'label-inline': inlineLabel}" autofocus />
+  	<!-- Select Options --> 
+  	<select *ngIf="type === InlineTypes.EDIT_SELECT && options" id="field" [ngClass]="{'label-inline': inlineLabel}"
+  	  formControlName="field" autofocus>
+  	  <option *ngFor="let option of options">
+  	  	{{option}}
+  	  </option>
+  	</select>
+    <div *ngIf="field.invalid && (field.dirty || field.touched)" class="invalid-feedback">
+      {{invalid}}
+    </div>
+  	<div class="action-btns">
+  	  <button class="ok-btn" (click)="save()">&#x2714;</button>
+  	  <button class="cancel-btn" (click)="cancel()">&#x2716;</button>
+  	</div>
+  </form>
+</div>

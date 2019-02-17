@@ -1,0 +1,51 @@
+<div id="page-container">
+  <h1 class="header">ANGULAR CLICK2EDIT</h1>
+  <div style="text-align: center;">
+  	<button (click)="flipPermission()">{{permissionText}}</button>
+  </div>
+  <div class="container">
+  	<h1 class="header">Editable Fields</h1>
+  	<inline-edit [type]="'text'" [value]="user.username" [placeholder]="'Enter username..'" [label]="'First name'"
+  		[pattern]="'^.{3,10}$'" [required]="true" [invalid]="'user name must be 3-10 characters'"
+  		(onSave)="save($event)" [permission]="permission" ></inline-edit>
+
+  	<inline-edit [type]="'number'" [value]="user.age" [placeholder]="'Enter your age..'" [min]="2" [max]="120"
+  		[required]="true" [invalid]="'age must be real'" (onSave)="save($event)" [label]="'Age'" 
+  		[permission]="permission" ></inline-edit>
+
+  	<inline-edit [type]="'select'" [value]="user.bloodType" [placeholder]="'Blood type'" [options]="bloodTypes"
+  		[required]="true" (onSave)="save($event)" [label]="'Blood type'" [permission]="permission" ></inline-edit>
+
+  	<inline-edit [type]="'date'" [value]="user.birthday" [max]="today" [label]="'Date of birth'"
+  		[required]="true" [invalid]="'date has to be older than today'" (onSave)="save($event)" 
+  		[permission]="permission" ></inline-edit>
+
+  	<inline-edit [type]="'textarea'" [value]="user.description" [placeholder]="'Enter description..'" [min]="10" [max]="500"
+  		[required]="true" [invalid]="'description has to be between 10-500 characters'" [label]="'Description'"
+  		(onSave)="save($event)" [permission]="permission" ></inline-edit>
+  </div>
+  <div class="container">
+  	<h1 class="header">Editable Fields</h1>
+  	<p class="header">With inline labels</p>
+  	<inline-edit [type]="'text'" [value]="user.username" [placeholder]="'Enter username..'" [label]="'First name'"
+  	   [pattern]="'^.{3,10}$'" [required]="true" [invalid]="'user name must be 3-10 characters'" [inlineLabel]="true"
+  	   (onSave)="save($event)" [permission]="permission" ></inline-edit>
+
+  	<inline-edit [type]="'number'" [value]="user.age" [placeholder]="'Enter your age..'" [min]="2" [max]="120"
+  	   [required]="true" [invalid]="'age must be real'" (onSave)="save($event)" [label]="'Age'"
+  	   [permission]="permission" [inlineLabel]="true">
+  	</inline-edit>
+
+  	<inline-edit [type]="'select'" [value]="user.bloodType" [placeholder]="'Blood type'" [options]="bloodTypes"
+  	   [required]="true" (onSave)="save($event)" [label]="'Blood type'" [inlineLabel]="true" 
+  	   [permission]="permission" ></inline-edit>
+
+  	<inline-edit [type]="'date'" [value]="user.birthday" [max]="today" [label]="'Date of birth'" [inlineLabel]="true"
+  	   [required]="true" [invalid]="'date has to be older than today'" (onSave)="save($event)" 
+  	   [permission]="permission" ></inline-edit>
+
+  	<inline-edit [type]="'textarea'" [value]="user.description" [placeholder]="'Enter description..'" [min]="10" [max]="500"
+  	   [required]="true" [invalid]="'description has to be between 10-500 characters'" [label]="'Description'" [inlineLabel]="true"
+  	   (onSave)="save($event)" [permission]="permission" ></inline-edit>
+  </div>
+</div>
